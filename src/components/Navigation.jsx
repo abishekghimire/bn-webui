@@ -1,25 +1,30 @@
 import React from "react";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
-import { DownOutlined, UserOutlined } from "@ant-design/icons";
+import { UserOutlined } from "@ant-design/icons";
 
 import DropDown from "./DropDown";
+import { useRouter } from "next/router";
 const { Header, Content, Footer } = Layout;
 
-const Navigation = () => {
+const Navigation = ({ children }) => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+  const router = useRouter();
 
   const babyNamesItems = [
     {
       label: "Popular Names",
       key: "popular",
       icon: <UserOutlined />,
+      onClick: () => router.push("/babynames/popularnames"),
     },
     {
       label: "Unique Names",
       key: "unique",
       icon: <UserOutlined />,
+      onClick: () => router.push("/babynames/uniquenames"),
     },
   ];
 
@@ -29,22 +34,24 @@ const Navigation = () => {
       label: "English Names",
       key: "english",
       icon: <UserOutlined />,
+      onClick: () => router.push("/babynames/englishnames"),
     },
     {
       label: "Indian Names",
       key: "indian",
       icon: <UserOutlined />,
+      onClick: () => router.push("/babynames/indiannames"),
     },
   ];
 
   const namesByGenderItems = [
     {
-      label: "English Names",
+      label: "Baby Boy Names",
       key: "english",
       icon: <UserOutlined />,
     },
     {
-      label: "Indian Names",
+      label: "Baby Girl Names",
       key: "indian",
       icon: <UserOutlined />,
     },
@@ -70,7 +77,6 @@ const Navigation = () => {
 
   const babyNamesMenuProps = {
     items: babyNamesItems,
-    onClick: handleMenuClick,
   };
 
   const namesByOriginMenuProps = {
@@ -86,6 +92,19 @@ const Navigation = () => {
   const namesByCelebrityProps = {
     items: namesByCelebrityItems,
     onClick: handleMenuClick,
+  };
+
+  const generateBreadcrumbItems = () => {
+    const paths = router.asPath.split("/").filter(Boolean);
+
+    return paths.map((path, index) => {
+      const url = `/${paths.slice(0, index + 1).join("/")}`;
+      return (
+        <Breadcrumb.Item key={url}>
+          <a href={url}>{path.charAt(0).toUpperCase() + path.slice(1)}</a>
+        </Breadcrumb.Item>
+      );
+    });
   };
 
   return (
@@ -105,14 +124,16 @@ const Navigation = () => {
             marginLeft: "0",
           }}
         >
-          <img
-            src="/babynames.png"
-            alt="Baby Names Logo"
-            style={{
-              width: "150px",
-              height: "auto",
-            }}
-          />
+          <a href="/">
+            <img
+              src="/babynames.png"
+              alt="Baby Names Logo"
+              style={{
+                width: "150px",
+                height: "auto",
+              }}
+            />
+          </a>
         </div>
         <Menu
           theme="light"
@@ -157,9 +178,7 @@ const Navigation = () => {
             margin: "16px 0",
           }}
         >
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
+          {generateBreadcrumbItems()}
         </Breadcrumb>
         <div
           style={{
@@ -169,7 +188,7 @@ const Navigation = () => {
             borderRadius: borderRadiusLG,
           }}
         >
-          Content
+          {children}
         </div>
       </Content>
       <Footer
