@@ -1,5 +1,9 @@
 import React from "react";
-import { DownOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  DownOutlined,
+  UserOutlined,
+  CaretDownOutlined,
+} from "@ant-design/icons";
 import { Dropdown, message, Space, Menu } from "antd";
 
 // Handle menu click event
@@ -11,7 +15,7 @@ const DropDown = ({ menuProps, buttonLabel }) => (
     <Dropdown menu={menuProps}>
       <Space>
         <p style={{ fontWeight: "bold" }}>{buttonLabel}</p>
-        <DownOutlined />
+        <CaretDownOutlined />
       </Space>
     </Dropdown>
   </Space>

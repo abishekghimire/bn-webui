@@ -3,12 +3,15 @@ import { Breadcrumb, Layout, Menu, theme } from "antd";
 import { DownOutlined, UserOutlined } from "@ant-design/icons";
 
 import DropDown from "./DropDown";
+import { useRouter } from "next/router";
 const { Header, Content, Footer } = Layout;
 
 const Navigation = () => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+  const router = useRouter();
 
   const babyNamesItems = [
     {
@@ -39,12 +42,12 @@ const Navigation = () => {
 
   const namesByGenderItems = [
     {
-      label: "English Names",
+      label: "Baby Boy Names",
       key: "english",
       icon: <UserOutlined />,
     },
     {
-      label: "Indian Names",
+      label: "Baby Girl Names",
       key: "indian",
       icon: <UserOutlined />,
     },
@@ -86,6 +89,17 @@ const Navigation = () => {
   const namesByCelebrityProps = {
     items: namesByCelebrityItems,
     onClick: handleMenuClick,
+  };
+
+  const generateBreadcrumbItems = () => {
+    const paths = router.asPath.split("/").filter(Boolean); // Get all parts of the current path
+
+    return paths.map((path, index) => {
+      const url = `/${paths.slice(0, index + 1).join("/")}`;
+      return {
+        title: <a href={url}>{path.charAt(0).toUpperCase() + path.slice(1)}</a>,
+      };
+    });
   };
 
   return (
@@ -157,9 +171,7 @@ const Navigation = () => {
             margin: "16px 0",
           }}
         >
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
+          {generateBreadcrumbItems()}
         </Breadcrumb>
         <div
           style={{
