@@ -1,9 +1,11 @@
 import React from "react";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
-import { UserOutlined } from "@ant-design/icons";
-
+import { UserOutlined, AudioOutlined } from "@ant-design/icons";
+import Link from "next/link";
 import DropDown from "./DropDown";
 import { useRouter } from "next/router";
+import { Input, Space } from "antd";
+const { Search } = Input;
 const { Header, Content, Footer } = Layout;
 
 const Navigation = ({ children }) => {
@@ -13,6 +15,7 @@ const Navigation = ({ children }) => {
 
   const router = useRouter();
 
+  const onSearch = (value, _e, info) => console.log(info?.source, value);
   const babyNamesItems = [
     {
       label: "Popular Names",
@@ -25,6 +28,19 @@ const Navigation = ({ children }) => {
       key: "unique",
       icon: <UserOutlined />,
       onClick: () => router.push("/babynames/uniquenames"),
+    },
+  ];
+
+  const petNamesItems = [
+    {
+      label: "Popular Pet Names",
+      key: "popular",
+      icon: <UserOutlined />,
+    },
+    {
+      label: "Unique Pet Names",
+      key: "unique",
+      icon: <UserOutlined />,
     },
   ];
 
@@ -79,6 +95,10 @@ const Navigation = ({ children }) => {
     items: babyNamesItems,
   };
 
+  const petNamesMenuProps = {
+    items: petNamesItems,
+  };
+
   const namesByOriginMenuProps = {
     items: namesByOriginItems,
     onClick: handleMenuClick,
@@ -124,7 +144,7 @@ const Navigation = ({ children }) => {
             marginLeft: "0",
           }}
         >
-          <a href="/">
+          <Link href="/">
             <img
               src="/babynames.png"
               alt="Baby Names Logo"
@@ -133,7 +153,7 @@ const Navigation = ({ children }) => {
                 height: "auto",
               }}
             />
-          </a>
+          </Link>
         </div>
         <Menu
           theme="light"
@@ -147,6 +167,9 @@ const Navigation = ({ children }) => {
         >
           <Menu.Item>
             <DropDown menuProps={babyNamesMenuProps} buttonLabel="Baby Names" />
+          </Menu.Item>
+          <Menu.Item>
+            <DropDown menuProps={petNamesMenuProps} buttonLabel="Pet Names" />
           </Menu.Item>
           <Menu.Item>
             <DropDown
@@ -167,6 +190,18 @@ const Navigation = ({ children }) => {
             />
           </Menu.Item>
         </Menu>
+        <Space direction="veritcal">
+          <Search
+            placeholder="Search for a name"
+            enterButton="Search"
+            size="large"
+            onSearch={onSearch}
+            style={{
+              marginTop: "0.7rem",
+            }}
+            className="custom-search"
+          />
+        </Space>
       </Header>
       <Content
         style={{

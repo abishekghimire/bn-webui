@@ -1,11 +1,12 @@
 import Navigation from "@/components/Navigation";
 import React from "react";
+import NameList from "@/components/NameList";
 
 const index = () => {
   return (
     <>
       <Navigation>
-        <p>popularnames</p>
+        <NameList />
       </Navigation>
     </>
   );
