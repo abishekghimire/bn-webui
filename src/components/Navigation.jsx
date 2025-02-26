@@ -72,6 +72,28 @@ const Navigation = ({ children }) => {
       icon: <UserOutlined />,
     },
   ];
+  const namesByMeaningItems = [
+    {
+      label: "Flowers",
+      key: "english",
+      icon: <UserOutlined />,
+    },
+    {
+      label: "Religion",
+      key: "indian",
+      icon: <UserOutlined />,
+    },
+    {
+      label: "Spiritual",
+      key: "indian",
+      icon: <UserOutlined />,
+    },
+    {
+      label: "Animals",
+      key: "indian",
+      icon: <UserOutlined />,
+    },
+  ];
 
   const namesByCelebrityItems = [
     {
@@ -106,6 +128,11 @@ const Navigation = ({ children }) => {
 
   const namesByGenderProps = {
     items: namesByGenderItems,
+    onClick: handleMenuClick,
+  };
+
+  const namesByMeaningProps = {
+    items: namesByMeaningItems,
     onClick: handleMenuClick,
   };
 
@@ -181,6 +208,12 @@ const Navigation = ({ children }) => {
             <DropDown
               menuProps={namesByGenderProps}
               buttonLabel="Names by Gender"
+            />
+          </Menu.Item>
+          <Menu.Item>
+            <DropDown
+              menuProps={namesByMeaningProps}
+              buttonLabel="Names by Meaning"
             />
           </Menu.Item>
           <Menu.Item>
