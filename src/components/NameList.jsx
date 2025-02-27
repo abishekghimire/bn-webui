@@ -77,16 +77,9 @@ const NameList = () => {
       <List
         itemLayout="horizontal"
         dataSource={filteredData}
-        renderItem={(item, index) => (
+        renderItem={(item) => (
           <List.Item>
-            <List.Item.Meta
-              avatar={
-                <Avatar
-                  src={`https://api.dicebear.com/7.x/miniavs/svg?seed=${index}`}
-                />
-              }
-              title={<a href="#">{item.name}</a>}
-            />
+            <List.Item.Meta title={<a href="#">{item.name}</a>} />
           </List.Item>
         )}
       />

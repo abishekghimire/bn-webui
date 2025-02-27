@@ -6,7 +6,7 @@ const DropDown = ({ menuProps, buttonLabel }) => (
   <Space wrap>
     <Dropdown menu={menuProps}>
       <Space>
-        <p style={{ fontWeight: "bold" }}>{buttonLabel}</p>
+        <p style={{ fontWeight: "600" }}>{buttonLabel}</p>
         <CaretDownOutlined />
       </Space>
     </Dropdown>

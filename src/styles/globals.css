@@ -33,7 +33,3 @@ body {
 .custom-search .ant-input:focus {
   border-color: black;
 }
-
-.custom-search .ant-input:hover {
-  border-color: black;
-}

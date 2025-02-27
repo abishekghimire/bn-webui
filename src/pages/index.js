@@ -20,8 +20,14 @@ const index = () => {
   return (
     <>
       <Navigation>
-        <div style={{ padding: "20px" }}>
-          <h2>Filter Items by Alphabet</h2>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "20px",
+          }}
+        >
           <AlphabetFilter items={items} />
         </div>
       </Navigation>
